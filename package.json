@@ -1,0 +1,65 @@
+{
+  "name": "cinnabar",
+  "version": "0.0.1",
+  "description": "Web step sequencer built with Web Audio API",
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.config.js",
+    "build": "run-s build:*",
+    "build:clean": "rimraf ./public",
+    "build:webpack": "NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
+    "format": "eslint --fix 'src/**/*.ts{,x}'",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint 'src/**/*.ts{,x}'",
+    "lint:style": "stylelint 'src/**/*.ts{,x}'",
+    "lint:tsc": "tsc --noEmit",
+    "serve": "serve ./public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabeliwo/cinnabar.git"
+  },
+  "author": "nabeliwo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nabeliwo/cinnabar/issues"
+  },
+  "homepage": "https://github.com/nabeliwo/cinnabar#readme",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^4.4.3",
+    "@types/webpack-env": "^1.15.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-smarthr": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "serve": "^11.3.0",
+    "stylelint": "^13.2.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "terser-webpack-plugin": "^2.3.5",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
+  }
+}

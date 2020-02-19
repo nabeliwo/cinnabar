@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { palette, size } from '../../../constants/theme'
 
 type Props = {
-  id?: string
+  id: string
   radios: Array<{
     value: string
     label: string
@@ -13,7 +13,7 @@ type Props = {
   onChange: (value: string) => void
 }
 
-export const RadioGroup: FC<Props> = ({ id = '', radios, value, onChange }) => (
+export const RadioGroup: FC<Props> = ({ id, radios, value, onChange }) => (
   <Wrapper>
     {radios.map(radio => {
       const key = `${id}-radio-group-${radio.value}`

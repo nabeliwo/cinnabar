@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 export const useStepTimer = (allSteps: number) => {
   const [active, setActive] = useState(false)
   const [timerID, setTimerID] = useState(0)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(-1)
 
   const startStepTimer = useCallback(() => {
     if (!active) {
@@ -18,7 +18,7 @@ export const useStepTimer = (allSteps: number) => {
   const stop = () => {
     setActive(false)
     clearInterval(timerID)
-    setStep(0)
+    setStep(-1)
     setTimerID(0)
   }
 

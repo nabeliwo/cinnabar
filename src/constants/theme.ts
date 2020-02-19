@@ -2,20 +2,20 @@ const SPACE = 8
 
 export const size = {
   space: {
-    xxs: `${SPACE * 1}px`,
-    xs: `${SPACE * 2}px`,
-    s: `${SPACE * 3}px`,
-    m: `${SPACE * 4}px`,
-    l: `${SPACE * 5}px`,
-    xl: `${SPACE * 6}px`,
-    xxl: `${SPACE * 7}px`,
+    xxs: SPACE * 1,
+    xs: SPACE * 2,
+    s: SPACE * 3,
+    m: SPACE * 4,
+    l: SPACE * 5,
+    xl: SPACE * 6,
+    xxl: SPACE * 7,
   },
 
   font: {
-    s: '11px',
-    m: '14px',
-    l: '18px',
-    xl: '24px',
+    s: 11,
+    m: 14,
+    l: 18,
+    xl: 24,
   },
 }
 

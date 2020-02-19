@@ -37,11 +37,11 @@ export const Controller: FC<Props> = ({ beat, setBeat }) => (
 )
 
 const Wrapper = styled.div`
-  padding: ${size.space.xs};
+  padding: ${size.space.xs}px;
   border-radius: 4px;
   background-color: #28282c;
 `
 const Label = styled.p`
-  margin-bottom: ${size.space.xxs};
-  font-size: ${size.font.l};
+  margin-bottom: ${size.space.xxs}px;
+  font-size: ${size.font.l}px;
 `

@@ -44,7 +44,7 @@ const Wrapper = styled.ul`
   align-items: center;
 
   > li:not(:first-child) {
-    margin-left: ${size.space.xs};
+    margin-left: ${size.space.xs}px;
   }
 `
 const Inner = styled.div`
@@ -94,7 +94,7 @@ const Box = styled.span`
   box-sizing: border-box;
 `
 const Label = styled.label`
-  padding-left: ${size.space.xxs};
-  font-size: ${size.font.m};
+  padding-left: ${size.space.xxs}px;
+  font-size: ${size.font.m}px;
   cursor: pointer;
 `

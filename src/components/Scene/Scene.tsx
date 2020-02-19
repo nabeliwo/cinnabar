@@ -11,23 +11,18 @@ type Props = ComponentProps<typeof Sequence> & ComponentProps<typeof Controller>
 
 export const Scene: FC<Props> = ({ step, beat, setBeat }) => (
   <>
-    <Graphic>
-      <Sequence beat={beat} step={step} />
-    </Graphic>
+    <Sequence beat={beat} step={step} />
     <Panel>
       <Controller beat={beat} setBeat={setBeat} />
     </Panel>
   </>
 )
 
-const Graphic = styled.div`
-  padding: ${size.space.xs};
-`
 const Panel = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: ${size.space.xs};
+  padding: ${size.space.xs}px;
   box-sizing: border-box;
 `

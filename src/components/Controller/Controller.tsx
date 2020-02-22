@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-import { size } from '../../constants/theme'
+import { palette, size } from '../../constants/theme'
 import { Beat, beatEnum } from '../../modules/config'
 
 import { RadioGroup } from '../ui/RadioGroup'
@@ -12,11 +12,26 @@ type Props = {
   setBeat: (value: string) => void
   bpm: number
   setBpm: (value: string) => void
+  active: boolean
+  toggle: () => void
 }
 
-export const Controller: FC<Props> = ({ beat, setBeat, bpm, setBpm }) => (
+export const Controller: FC<Props> = ({ beat, setBeat, bpm, setBpm, active, toggle }) => (
   <Wrapper>
     <List>
+      <li>
+        <PlayerWrapper>
+          <Player
+            onClick={e => {
+              console.log('呼ばれた')
+              console.log(e)
+              toggle()
+            }}
+          >
+            {active ? <Square /> : <Triangle />}
+          </Player>
+        </PlayerWrapper>
+      </li>
       <li>
         <Label>Beat</Label>
         <BeatRadios
@@ -51,6 +66,35 @@ const Wrapper = styled.div`
   padding: ${size.space.xs}px;
   border-radius: 4px;
   background-color: #28282c;
+`
+const PlayerWrapper = styled.div`
+  padding: 4px 0;
+`
+const Player = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid ${palette.blue};
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 3px 2px ${palette.blue};
+  }
+`
+const Triangle = styled.div`
+  margin-left: 3px;
+  border: 8px solid transparent;
+  border-right: 0;
+  border-left: 14px solid ${palette.blue};
+`
+const Square = styled.div`
+  width: 16px;
+  height: 16px;
+  background-color: ${palette.blue};
 `
 const List = styled.ul`
   display: flex;

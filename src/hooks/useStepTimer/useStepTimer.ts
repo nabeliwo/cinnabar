@@ -43,5 +43,5 @@ export const useStepTimer = (beat: Beat, bpm: number) => {
     }
   }
 
-  return { step, start, stop, toggle }
+  return { step, stop, toggle, active }
 }

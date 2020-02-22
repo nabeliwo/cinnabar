@@ -9,7 +9,7 @@ import { Scene } from '../../components/Scene'
 export const SceneContainer = () => {
   const [bpm, setBpm] = useState<number>(120)
   const [beat, setBeat] = useState<Beat>(beatEnum[8])
-  const { step, stop, toggle } = useStepTimer(beat, bpm)
+  const { step, stop, toggle, active } = useStepTimer(beat, bpm)
 
   const handleKeyDownSpace = useCallback(
     (e: KeyboardEvent) => {
@@ -37,5 +37,15 @@ export const SceneContainer = () => {
     }
   }
 
-  return <Scene step={step} beat={beat} setBeat={changeBeat} bpm={bpm} setBpm={changeBpm} />
+  return (
+    <Scene
+      step={step}
+      beat={beat}
+      setBeat={changeBeat}
+      bpm={bpm}
+      setBpm={changeBpm}
+      active={active}
+      toggle={toggle}
+    />
+  )
 }

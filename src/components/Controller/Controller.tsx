@@ -21,15 +21,7 @@ export const Controller: FC<Props> = ({ beat, setBeat, bpm, setBpm, active, togg
     <List>
       <li>
         <PlayerWrapper>
-          <Player
-            onClick={e => {
-              console.log('呼ばれた')
-              console.log(e)
-              toggle()
-            }}
-          >
-            {active ? <Square /> : <Triangle />}
-          </Player>
+          <Player onClick={toggle}>{active ? <Square /> : <Triangle />}</Player>
         </PlayerWrapper>
       </li>
       <li>

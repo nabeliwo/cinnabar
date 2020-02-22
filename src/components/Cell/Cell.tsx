@@ -8,16 +8,17 @@ type Props = {
   stepIndex: number
   resourceIndex: number
   cellSize: number
+  playAudio: (resourceIndex: number) => void
 }
 
-export const Cell: FC<Props> = ({ currentStep, stepIndex, resourceIndex, cellSize }) => {
+export const Cell: FC<Props> = ({ currentStep, stepIndex, resourceIndex, cellSize, playAudio }) => {
   const [active, setActive] = useState(false)
   const handleClick = useCallback(() => {
     setActive(!active)
   }, [active])
 
   if (currentStep === stepIndex && active) {
-    console.log(resourceIndex, stepIndex)
+    playAudio(resourceIndex)
   }
 
   return <Wrapper className={active ? 'active' : ''} cellSize={cellSize} onClick={handleClick} />

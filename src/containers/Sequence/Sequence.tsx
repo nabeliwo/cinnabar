@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 
 import { Beat } from '../../modules/beat'
-import { AudioResource, defaultAudios } from '../../modules/audio'
+import { AudioResource, defaultAudios, setAudioElements } from '../../modules/audio'
 
 import { Sequence } from '../../components/Sequence'
 
@@ -13,19 +13,24 @@ type Props = {
 export const SequenceContainer: FC<Props> = ({ beat, step }) => {
   const [audios, setAudios] = useState<AudioResource[]>([])
 
+  const playAudio = useCallback(
+    (audioIndex: number) => {
+      const audio = audios[audioIndex]
+
+      if (audio && audio.element) {
+        audio.element.pause()
+        audio.element.currentTime = 0
+        audio.element.play()
+      }
+    },
+    [audios],
+  )
+
   useEffect(() => {
-    if (audios.length !== 0) return
-    setAudios(defaultAudios)
+    const audioResources = setAudioElements(defaultAudios)
+    if (audioResources) setAudios(audioResources)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if (audios.length === 0) return
-
-    audios.forEach(audio => {
-      console.log(audio)
-    })
-  }, [audios])
-
-  return <Sequence beatNum={Number(beat)} step={step} />
+  return <Sequence beatNum={Number(beat)} step={step} playAudio={playAudio} />
 }

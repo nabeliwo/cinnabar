@@ -1,10 +1,38 @@
 export type AudioResource = {
   name: string
   path: string
+  element: HTMLAudioElement | null
 }
 export const defaultAudios: AudioResource[] = [
   {
-    name: 'arp_1',
-    path: '/assets/audio/arp_1.wav',
+    name: 'snare_3',
+    path: '/assets/audio/snare_3.wav',
+    element: null,
+  },
+  {
+    name: 'kick_4',
+    path: '/assets/audio/kick_4.wav',
+    element: null,
   },
 ]
+export const setAudioElements = (audioResources: AudioResource[]) => {
+  const newAudios: AudioResource[] = []
+  const audioListEl = document.getElementById('audios')
+
+  if (!audioListEl) return
+
+  audioResources.forEach(({ name, path }) => {
+    const audioEl = document.createElement('audio')
+
+    audioEl.id = `audio-${name}`
+    audioEl.src = path
+    audioListEl.appendChild(audioEl)
+    newAudios.push({
+      name,
+      path,
+      element: audioEl,
+    })
+  })
+
+  return newAudios
+}

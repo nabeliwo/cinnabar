@@ -12,9 +12,10 @@ const CELL_MARGIN = 4
 type Props = {
   beatNum: number
   step: number
+  playAudio: (resourceIndex: number) => void
 }
 
-export const Sequence: FC<Props> = ({ beatNum, step }) => (
+export const Sequence: FC<Props> = ({ beatNum, step, playAudio }) => (
   <Wrapper allSteps={beatNum * 4}>
     <Resources>
       <li>hoge</li>
@@ -32,14 +33,26 @@ export const Sequence: FC<Props> = ({ beatNum, step }) => (
         <li>
           {[...Array(beatNum * 4)].map((_, i) => (
             <CellWrapper key={i}>
-              <Cell currentStep={step} stepIndex={i} resourceIndex={0} cellSize={CELL_SIZE} />
+              <Cell
+                currentStep={step}
+                stepIndex={i}
+                resourceIndex={0}
+                cellSize={CELL_SIZE}
+                playAudio={playAudio}
+              />
             </CellWrapper>
           ))}
         </li>
         <li>
           {[...Array(beatNum * 4)].map((_, i) => (
             <CellWrapper key={i}>
-              <Cell currentStep={step} stepIndex={i} resourceIndex={1} cellSize={CELL_SIZE} />
+              <Cell
+                currentStep={step}
+                stepIndex={i}
+                resourceIndex={1}
+                cellSize={CELL_SIZE}
+                playAudio={playAudio}
+              />
             </CellWrapper>
           ))}
         </li>

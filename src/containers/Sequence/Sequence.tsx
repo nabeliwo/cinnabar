@@ -32,5 +32,5 @@ export const SequenceContainer: FC<Props> = ({ beat, step }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <Sequence beatNum={Number(beat)} step={step} playAudio={playAudio} />
+  return <Sequence beatNum={Number(beat)} step={step} audios={audios} playAudio={playAudio} />
 }

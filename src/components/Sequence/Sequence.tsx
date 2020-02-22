@@ -1,25 +1,41 @@
 import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 
-import { palette, size } from '../../constants/theme'
+import { size } from '../../constants/theme'
+import { AudioResource, defaultAudios } from '../../modules/audio'
 
+import { Select } from '../ui/Select'
 import { Cell } from '../Cell'
 
-const SELECT_SIZE = 40
+const SELECT_SIZE = 80
 const CELL_SIZE = 20
 const CELL_MARGIN = 4
+
+const audioOptions = defaultAudios.map(audio => ({
+  value: audio.name,
+  label: audio.name,
+}))
 
 type Props = {
   beatNum: number
   step: number
+  audios: AudioResource[]
   playAudio: (resourceIndex: number) => void
 }
 
-export const Sequence: FC<Props> = ({ beatNum, step, playAudio }) => (
+export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio }) => (
   <Wrapper allSteps={beatNum * 4}>
     <Resources>
-      <li>hoge</li>
-      <li>hoge</li>
+      {audios.map(audio => (
+        <li key={audio.name}>
+          <Select
+            width={SELECT_SIZE}
+            value={audio.name}
+            options={audioOptions}
+            onChange={value => console.log(value)}
+          />
+        </li>
+      ))}
     </Resources>
 
     <Table>
@@ -78,16 +94,8 @@ const Wrapper = styled.div<{ allSteps: number }>`
 const Resources = styled.ul`
   margin-right: ${size.space.xs}px;
 
-  > li {
-    width: ${SELECT_SIZE}px;
-    height: ${CELL_SIZE}px;
-    border-radius: 4px;
-    border: 1px solid ${palette.blue};
-    box-sizing: border-box;
-
-    &:not(:first-child) {
-      margin-top: ${CELL_MARGIN * 2}px;
-    }
+  > li:not(:first-child) {
+    margin-top: ${CELL_MARGIN * 2}px;
   }
 `
 const Table = styled.div`

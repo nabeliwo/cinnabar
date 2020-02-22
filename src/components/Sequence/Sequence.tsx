@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { palette, size } from '../../constants/theme'
-
 import { Beat } from '../../modules/config'
+
+import { Cell } from '../Cell'
 
 const SELECT_SIZE = 40
 const CELL_SIZE = 20
@@ -34,12 +35,16 @@ export const Sequence: FC<Props> = ({ beat, step }) => {
         <Rows>
           <li>
             {[...Array(beatNum * 4)].map((_, i) => (
-              <Cell key={i} />
+              <CellWrapper key={i}>
+                <Cell currentStep={step} stepIndex={i} resourceIndex={0} cellSize={CELL_SIZE} />
+              </CellWrapper>
             ))}
           </li>
           <li>
             {[...Array(beatNum * 4)].map((_, i) => (
-              <Cell key={i} />
+              <CellWrapper key={i}>
+                <Cell currentStep={step} stepIndex={i} resourceIndex={1} cellSize={CELL_SIZE} />
+              </CellWrapper>
             ))}
           </li>
         </Rows>
@@ -113,17 +118,7 @@ const Rows = styled.ul`
     }
   }
 `
-const Cell = styled.div`
+const CellWrapper = styled.div`
   display: inline-block;
-  width: ${CELL_SIZE}px;
-  height: ${CELL_SIZE}px;
   margin: 0 ${CELL_MARGIN}px;
-  border-radius: 4px;
-  border: 1px solid ${palette.blue};
-  box-sizing: border-box;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 0 3px 2px ${palette.blue};
-  }
 `

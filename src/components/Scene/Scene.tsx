@@ -9,11 +9,11 @@ import { size } from '../../constants/theme'
 
 type Props = ComponentProps<typeof Sequence> & ComponentProps<typeof Controller>
 
-export const Scene: FC<Props> = ({ step, beat, setBeat }) => (
+export const Scene: FC<Props> = ({ step, beat, setBeat, bpm, setBpm }) => (
   <>
     <Sequence beat={beat} step={step} />
     <Panel>
-      <Controller beat={beat} setBeat={setBeat} />
+      <Controller beat={beat} setBeat={setBeat} bpm={bpm} setBpm={setBpm} />
     </Panel>
   </>
 )

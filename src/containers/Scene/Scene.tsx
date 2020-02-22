@@ -7,6 +7,7 @@ import { Beat, assertIsBeat, beatEnum } from '../../modules/config'
 import { Scene } from '../../components/Scene'
 
 export const SceneContainer = () => {
+  const [bpm, setBpm] = useState<number>(120)
   const [beat, setBeat] = useState<Beat>(beatEnum[8])
   const { step, stop, toggle } = useStepTimer(Number(beat) * 4)
 
@@ -27,5 +28,14 @@ export const SceneContainer = () => {
     stop()
   }
 
-  return <Scene step={step} beat={beat} setBeat={changeBeat} />
+  const changeBpm = (value: string) => {
+    const bpmNum = Number(value)
+
+    if (bpmNum > 0) {
+      setBpm(bpmNum)
+      stop()
+    }
+  }
+
+  return <Scene step={step} beat={beat} setBeat={changeBeat} bpm={bpm} setBpm={changeBpm} />
 }

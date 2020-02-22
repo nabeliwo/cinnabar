@@ -10,11 +10,12 @@ type Props = {
     label: string
   }>
   value: string
+  className?: string
   onChange: (value: string) => void
 }
 
-export const RadioGroup: FC<Props> = ({ id, radios, value, onChange }) => (
-  <Wrapper>
+export const RadioGroup: FC<Props> = ({ id, radios, value, className = '', onChange }) => (
+  <Wrapper className={className}>
     {radios.map(radio => {
       const key = `${id}-radio-group-${radio.value}`
 

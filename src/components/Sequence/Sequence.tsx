@@ -14,30 +14,39 @@ type Props = {
   step: number
 }
 
-export const Sequence: FC<Props> = ({ beat, step }) => (
-  <Wrapper allSteps={Number(beat) * 4}>
-    <Resources>
-      <li>hoge</li>
-      <li>hoge</li>
-    </Resources>
-    <Table>
-      {step >= 0 && <Progress step={step} />}
+export const Sequence: FC<Props> = ({ beat, step }) => {
+  const beatNum = Number(beat)
 
-      <Rows>
-        <li>
-          {[...Array(Number(beat) * 4)].map((_, i) => (
-            <Cell key={i} />
-          ))}
-        </li>
-        <li>
-          {[...Array(Number(beat) * 4)].map((_, i) => (
-            <Cell key={i} />
-          ))}
-        </li>
-      </Rows>
-    </Table>
-  </Wrapper>
-)
+  return (
+    <Wrapper allSteps={beatNum * 4}>
+      <Resources>
+        <li>hoge</li>
+        <li>hoge</li>
+      </Resources>
+
+      <Table>
+        {step >= 0 && <Progress step={step} />}
+
+        <Separater part={1} beat={beatNum} />
+        <Separater part={2} beat={beatNum} />
+        <Separater part={3} beat={beatNum} />
+
+        <Rows>
+          <li>
+            {[...Array(beatNum * 4)].map((_, i) => (
+              <Cell key={i} />
+            ))}
+          </li>
+          <li>
+            {[...Array(beatNum * 4)].map((_, i) => (
+              <Cell key={i} />
+            ))}
+          </li>
+        </Rows>
+      </Table>
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.div<{ allSteps: number }>`
   display: flex;
@@ -80,6 +89,18 @@ const Progress = styled.div<{ step: number }>`
     width: ${CELL_SIZE + CELL_MARGIN * 2}px;
     height: calc(100% + ${CELL_MARGIN * 2}px);
     background-color: #fff;
+  `}
+`
+const Separater = styled.div<{ part: number; beat: number }>`
+  ${({ part, beat }) => css`
+    position: absolute;
+    top: -${CELL_MARGIN}px;
+    left: ${CELL_SIZE * part * beat + CELL_MARGIN * 2 * (part * beat - 1) + CELL_MARGIN}px;
+    opacity: 0.4;
+    width: 1px;
+    height: calc(100% + ${CELL_MARGIN * 2}px);
+    background-color: #fff;
+    content: '';
   `}
 `
 const Rows = styled.ul`

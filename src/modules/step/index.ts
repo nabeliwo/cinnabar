@@ -1,0 +1,1 @@
+export { getSpeedPerStep } from './stepDomain'

@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { palette, size } from '../../constants/theme'
-import { Beat } from '../../modules/config'
 
 import { Cell } from '../Cell'
 
@@ -11,47 +10,43 @@ const CELL_SIZE = 20
 const CELL_MARGIN = 4
 
 type Props = {
-  beat: Beat
+  beatNum: number
   step: number
 }
 
-export const Sequence: FC<Props> = ({ beat, step }) => {
-  const beatNum = Number(beat)
+export const Sequence: FC<Props> = ({ beatNum, step }) => (
+  <Wrapper allSteps={beatNum * 4}>
+    <Resources>
+      <li>hoge</li>
+      <li>hoge</li>
+    </Resources>
 
-  return (
-    <Wrapper allSteps={beatNum * 4}>
-      <Resources>
-        <li>hoge</li>
-        <li>hoge</li>
-      </Resources>
+    <Table>
+      {step >= 0 && <Progress step={step} />}
 
-      <Table>
-        {step >= 0 && <Progress step={step} />}
+      <Separater part={1} beat={beatNum} />
+      <Separater part={2} beat={beatNum} />
+      <Separater part={3} beat={beatNum} />
 
-        <Separater part={1} beat={beatNum} />
-        <Separater part={2} beat={beatNum} />
-        <Separater part={3} beat={beatNum} />
-
-        <Rows>
-          <li>
-            {[...Array(beatNum * 4)].map((_, i) => (
-              <CellWrapper key={i}>
-                <Cell currentStep={step} stepIndex={i} resourceIndex={0} cellSize={CELL_SIZE} />
-              </CellWrapper>
-            ))}
-          </li>
-          <li>
-            {[...Array(beatNum * 4)].map((_, i) => (
-              <CellWrapper key={i}>
-                <Cell currentStep={step} stepIndex={i} resourceIndex={1} cellSize={CELL_SIZE} />
-              </CellWrapper>
-            ))}
-          </li>
-        </Rows>
-      </Table>
-    </Wrapper>
-  )
-}
+      <Rows>
+        <li>
+          {[...Array(beatNum * 4)].map((_, i) => (
+            <CellWrapper key={i}>
+              <Cell currentStep={step} stepIndex={i} resourceIndex={0} cellSize={CELL_SIZE} />
+            </CellWrapper>
+          ))}
+        </li>
+        <li>
+          {[...Array(beatNum * 4)].map((_, i) => (
+            <CellWrapper key={i}>
+              <Cell currentStep={step} stepIndex={i} resourceIndex={1} cellSize={CELL_SIZE} />
+            </CellWrapper>
+          ))}
+        </li>
+      </Rows>
+    </Table>
+  </Wrapper>
+)
 
 const Wrapper = styled.div<{ allSteps: number }>`
   display: flex;

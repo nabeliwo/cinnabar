@@ -1,15 +1,16 @@
 import React, { ComponentProps, FC } from 'react'
 import styled from 'styled-components'
 
-import { Sequence } from '../Sequence'
-import { Controller } from '../Controller'
 import { size } from '../../constants/theme'
 
-type Props = ComponentProps<typeof Sequence> & ComponentProps<typeof Controller>
+import { SequenceContainer } from '../../containers/Sequence'
+import { Controller } from '../Controller'
+
+type Props = ComponentProps<typeof SequenceContainer> & ComponentProps<typeof Controller>
 
 export const Scene: FC<Props> = ({ step, beat, setBeat, bpm, setBpm, active, toggle }) => (
   <>
-    <Sequence beat={beat} step={step} />
+    <SequenceContainer beat={beat} step={step} />
     <Panel>
       <Controller
         beat={beat}

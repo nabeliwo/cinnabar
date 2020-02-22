@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 
 import { palette, size } from '../../constants/theme'
-import { Beat, beatEnum } from '../../modules/config'
+import { Beat, beatEnum } from '../../modules/beat'
 
 import { RadioGroup } from '../ui/RadioGroup'
 import { Input } from '../ui/Input'

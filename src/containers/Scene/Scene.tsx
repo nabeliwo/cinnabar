@@ -2,14 +2,16 @@ import React, { useCallback, useState } from 'react'
 
 import { useEventListener } from '../../hooks/useEventListener'
 import { useStepTimer } from '../../hooks/useStepTimer'
-import { Beat, assertIsBeat, beatEnum } from '../../modules/config'
+import { Beat, assertIsBeat, beatEnum } from '../../modules/beat'
+import { getSpeedPerStep } from '../../modules/step'
 
 import { Scene } from '../../components/Scene'
 
 export const SceneContainer = () => {
   const [bpm, setBpm] = useState<number>(120)
   const [beat, setBeat] = useState<Beat>(beatEnum[8])
-  const { step, stop, toggle, active } = useStepTimer(beat, bpm)
+  const beatNum = Number(beat)
+  const { step, stop, toggle, active } = useStepTimer(beatNum * 4, getSpeedPerStep(bpm, beatNum))
 
   const handleKeyDownSpace = useCallback(
     (e: KeyboardEvent) => {

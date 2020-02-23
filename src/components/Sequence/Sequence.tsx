@@ -7,7 +7,7 @@ import { AudioResource, defaultAudios } from '../../modules/audio'
 import { Select } from '../ui/Select'
 import { Cell } from '../Cell'
 
-const SELECT_SIZE = 80
+const SELECT_SIZE = 72
 const CELL_SIZE = 20
 const CELL_MARGIN = 4
 
@@ -21,18 +21,19 @@ type Props = {
   step: number
   audios: AudioResource[]
   playAudio: (resourceIndex: number) => void
+  selectAudio: (name: string, index: number) => void
 }
 
-export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio }) => (
+export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio, selectAudio }) => (
   <Wrapper allSteps={beatNum * 4}>
     <Resources>
-      {audios.map(audio => (
-        <li key={audio.name}>
+      {audios.map((audio, i) => (
+        <li key={`resource-${i}-${audio.name}`}>
           <Select
             width={SELECT_SIZE}
             value={audio.name}
             options={audioOptions}
-            onChange={value => console.log(value)}
+            onChange={value => selectAudio(value, i)}
           />
         </li>
       ))}

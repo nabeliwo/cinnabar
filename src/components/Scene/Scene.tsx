@@ -8,9 +8,9 @@ import { Controller } from '../Controller'
 
 type Props = ComponentProps<typeof SequenceContainer> & ComponentProps<typeof Controller>
 
-export const Scene: FC<Props> = ({ step, beat, setBeat, bpm, setBpm, active, toggle }) => (
+export const Scene: FC<Props> = ({ step, beat, setBeat, bpm, setBpm, active, toggle, stop }) => (
   <>
-    <SequenceContainer beat={beat} step={step} />
+    <SequenceContainer beat={beat} step={step} stop={stop} />
     <Panel>
       <Controller
         beat={beat}

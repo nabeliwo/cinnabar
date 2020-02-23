@@ -48,6 +48,7 @@ export const SceneContainer = () => {
       setBpm={changeBpm}
       active={active}
       toggle={toggle}
+      stop={stop}
     />
   )
 }

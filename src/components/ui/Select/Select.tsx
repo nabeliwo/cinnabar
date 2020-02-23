@@ -16,8 +16,6 @@ type Props = {
 
 export const Select: FC<Props> = ({ width, value, options, onChange }) => (
   <Wrapper width={width}>
-    {console.log(options)}
-    {console.log(value)}
     <IconWrap>
       <FaSort size={13} color={palette.blue} />
     </IconWrap>
@@ -41,7 +39,7 @@ const SelectBox = styled.select`
   position: relative;
   width: 100%;
   padding: 2px ${size.space.xxs}px;
-  padding-right: ${size.space.m}px;
+  padding-right: ${size.space.s}px;
   border-radius: 4px;
   border: 1px solid ${palette.blue};
   background-color: transparent;

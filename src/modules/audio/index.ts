@@ -1,1 +1,2 @@
-export { AudioResource, audioResources, defaultAudios, setAudioElements } from './audioDomain'
+export { AudioResource, setAudioElements } from './audioDomain'
+export { audioResources, defaultAudioNames } from './audioResources'

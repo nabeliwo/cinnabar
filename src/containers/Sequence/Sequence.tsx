@@ -1,9 +1,15 @@
 import React, { FC, useCallback, useEffect, useState } from 'react'
 
 import { Beat } from '../../modules/beat'
-import { AudioResource, audioResources, defaultAudios, setAudioElements } from '../../modules/audio'
+import {
+  AudioResource,
+  audioResources,
+  defaultAudioNames,
+  setAudioElements,
+} from '../../modules/audio'
 
 import { Sequence } from '../../components/Sequence'
+import { getAudios } from '../../modules/audio/audioDomain'
 
 type Props = {
   beat: Beat
@@ -47,7 +53,7 @@ export const SequenceContainer: FC<Props> = ({ beat, step, stop }) => {
   )
 
   useEffect(() => {
-    const setAudioResources = setAudioElements(defaultAudios)
+    const setAudioResources = setAudioElements(getAudios(defaultAudioNames))
     if (setAudioResources) setAudios(setAudioResources)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

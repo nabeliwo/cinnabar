@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { size } from '../../constants/theme'
-import { AudioResource, defaultAudios } from '../../modules/audio'
+import { AudioResource, audioResources } from '../../modules/audio'
 
 import { Select } from '../ui/Select'
 import { Cell } from '../Cell'
@@ -11,7 +11,7 @@ const SELECT_SIZE = 72
 const CELL_SIZE = 20
 const CELL_MARGIN = 4
 
-const audioOptions = defaultAudios.map(audio => ({
+const audioOptions = audioResources.map(audio => ({
   value: audio.name,
   label: audio.name,
 }))

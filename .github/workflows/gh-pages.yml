@@ -20,7 +20,7 @@ jobs:
     - name: install
       run: yarn install
 
-    - name: int
+    - name: lint
       run: yarn lint
 
     - name: build

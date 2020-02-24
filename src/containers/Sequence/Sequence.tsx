@@ -39,18 +39,28 @@ export const SequenceContainer: FC<Props> = ({ beat, step, stop }) => {
 
       if (!audio) return
 
+      stop()
+
       const newAudios = audios.map((item, i) => {
         if (i === index) return audio
         return item
       })
-
-      stop()
-
       const setAudioResources = setAudioElements(newAudios)
       if (setAudioResources) setAudios(setAudioResources)
     },
     [audios, stop],
   )
+
+  const addAudio = useCallback(() => {
+    setAudios([
+      ...audios,
+      {
+        name: '',
+        path: '',
+        element: null,
+      },
+    ])
+  }, [audios])
 
   useEffect(() => {
     const setAudioResources = setAudioElements(getAudios(defaultAudioNames))
@@ -65,6 +75,7 @@ export const SequenceContainer: FC<Props> = ({ beat, step, stop }) => {
       audios={audios}
       playAudio={playAudio}
       selectAudio={selectAudio}
+      addAudio={addAudio}
     />
   )
 }

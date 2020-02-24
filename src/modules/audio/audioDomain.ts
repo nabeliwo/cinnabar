@@ -5,6 +5,7 @@ export type AudioResource = {
   path: string
   element: HTMLAudioElement | null
 }
+
 export const setAudioElements = (audios: AudioResource[]) => {
   const newAudios: AudioResource[] = []
   const audioListEl = document.getElementById('audios')
@@ -15,10 +16,10 @@ export const setAudioElements = (audios: AudioResource[]) => {
     audioListEl.removeChild(audioListEl.lastChild)
   }
 
-  audios.forEach(({ name, path }) => {
+  audios.forEach(({ name, path }, i) => {
     const audioEl = document.createElement('audio')
 
-    audioEl.id = `audio-${name}`
+    audioEl.id = `audio-${name}-${i}`
     audioEl.src = path
     audioListEl.appendChild(audioEl)
     newAudios.push({

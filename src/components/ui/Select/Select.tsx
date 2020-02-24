@@ -38,7 +38,7 @@ const Wrapper = styled.div<{ width: number }>`
 const SelectBox = styled.select`
   position: relative;
   width: 100%;
-  padding: 2px ${size.space.xxs}px;
+  padding: 3px ${size.space.xxs}px;
   padding-right: ${size.space.s}px;
   border-radius: 4px;
   border: 1px solid ${palette.blue};

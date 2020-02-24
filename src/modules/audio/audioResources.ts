@@ -66,4 +66,4 @@ export const audioResources: AudioResource[] = [
   'snare_5',
   'snare_6',
 ].map(name => ({ name, path: `/assets/audio/${name}.wav`, element: null }))
-export const defaultAudioNames = ['snare_3', 'kick_4']
+export const defaultAudioNames = ['crash_1', 'hihat_2', 'snare_3', 'kick_4']

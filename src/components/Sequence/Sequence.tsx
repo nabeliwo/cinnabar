@@ -47,32 +47,21 @@ export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio, selectAu
       <Separater part={3} beat={beatNum} />
 
       <Rows>
-        <li>
-          {[...Array(beatNum * 4)].map((_, i) => (
-            <CellWrapper key={i}>
-              <Cell
-                currentStep={step}
-                stepIndex={i}
-                resourceIndex={0}
-                cellSize={CELL_SIZE}
-                playAudio={playAudio}
-              />
-            </CellWrapper>
-          ))}
-        </li>
-        <li>
-          {[...Array(beatNum * 4)].map((_, i) => (
-            <CellWrapper key={i}>
-              <Cell
-                currentStep={step}
-                stepIndex={i}
-                resourceIndex={1}
-                cellSize={CELL_SIZE}
-                playAudio={playAudio}
-              />
-            </CellWrapper>
-          ))}
-        </li>
+        {audios.map((audio, i) => (
+          <li key={`sequence-${i}-${audio.name}`}>
+            {[...Array(beatNum * 4)].map((_, j) => (
+              <CellWrapper key={`sequence-${i}-${audio.name}-${j}`}>
+                <Cell
+                  currentStep={step}
+                  stepIndex={j}
+                  resourceIndex={i}
+                  cellSize={CELL_SIZE}
+                  playAudio={playAudio}
+                />
+              </CellWrapper>
+            ))}
+          </li>
+        ))}
       </Rows>
     </Table>
   </Wrapper>

@@ -1,7 +1,7 @@
 {
   "name": "cinnabar",
   "version": "0.0.1",
-  "description": "Web step sequencer built with Web Audio API",
+  "description": "Web step sequencer built with Web Audio API and React",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.config.js",
     "build": "run-s build:*",

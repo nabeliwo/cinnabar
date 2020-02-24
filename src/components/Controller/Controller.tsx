@@ -51,6 +51,18 @@ export const Controller: FC<Props> = ({ beat, setBeat, bpm, setBpm, active, togg
         <NumberInput type="number" value={bpm} onChange={value => setBpm(value)} />
       </li>
     </List>
+
+    <Text>
+      Made by{' '}
+      <Link href="https://twitter.com/nabeliwo" target="_blank" rel="noopener noreferrer">
+        nabeliwo
+      </Link>
+      . View the source on{' '}
+      <Link href="https://github.com/nabeliwo/cinnabar" target="_blank" rel="noopener noreferrer">
+        Github
+      </Link>
+      .
+    </Text>
   </Wrapper>
 )
 
@@ -91,6 +103,7 @@ const Square = styled.div`
 const List = styled.ul`
   display: flex;
   align-items: flex-start;
+  margin-bottom: ${size.space.xs}px;
 
   > li:not(:first-child) {
     margin-left: ${size.space.s}px;
@@ -105,4 +118,16 @@ const BeatRadios = styled(RadioGroup)`
 `
 const NumberInput = styled(Input)`
   width: 40px;
+`
+const Text = styled.p`
+  font-size: ${size.font.m}px;
+  text-align: center;
+`
+const Link = styled.a`
+  color: ${palette.blue};
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
 `

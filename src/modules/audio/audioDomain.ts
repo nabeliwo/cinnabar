@@ -1,32 +1,11 @@
+import { audioResources } from './audioResources'
+
 export type AudioResource = {
   name: string
   path: string
   element: HTMLAudioElement | null
 }
-export const audioResources: AudioResource[] = [
-  {
-    name: 'snare_3',
-    path: '/assets/audio/snare_3.wav',
-    element: null,
-  },
-  {
-    name: 'kick_4',
-    path: '/assets/audio/kick_4.wav',
-    element: null,
-  },
-]
-export const defaultAudios: AudioResource[] = [
-  {
-    name: 'snare_3',
-    path: '/assets/audio/snare_3.wav',
-    element: null,
-  },
-  {
-    name: 'kick_4',
-    path: '/assets/audio/kick_4.wav',
-    element: null,
-  },
-]
+
 export const setAudioElements = (audios: AudioResource[]) => {
   const newAudios: AudioResource[] = []
   const audioListEl = document.getElementById('audios')
@@ -37,10 +16,10 @@ export const setAudioElements = (audios: AudioResource[]) => {
     audioListEl.removeChild(audioListEl.lastChild)
   }
 
-  audios.forEach(({ name, path }) => {
+  audios.forEach(({ name, path }, i) => {
     const audioEl = document.createElement('audio')
 
-    audioEl.id = `audio-${name}`
+    audioEl.id = `audio-${name}-${i}`
     audioEl.src = path
     audioListEl.appendChild(audioEl)
     newAudios.push({
@@ -51,4 +30,10 @@ export const setAudioElements = (audios: AudioResource[]) => {
   })
 
   return newAudios
+}
+export const getAudios = (names: string[]) => {
+  const audios = names
+    .map(name => audioResources.find(item => item.name === name))
+    .filter(item => item)
+  return audios as AudioResource[]
 }

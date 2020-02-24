@@ -60,7 +60,7 @@ const Wrapper = styled.div`
   background-color: #28282c;
 `
 const PlayerWrapper = styled.div`
-  padding: 4px 0;
+  padding: 6px 0;
 `
 const Player = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 
-import { size } from '../../constants/theme'
-import { AudioResource, defaultAudios } from '../../modules/audio'
+import { palette, size } from '../../constants/theme'
+import { AudioResource, audioResources } from '../../modules/audio'
 
 import { Select } from '../ui/Select'
 import { Cell } from '../Cell'
@@ -11,10 +11,16 @@ const SELECT_SIZE = 72
 const CELL_SIZE = 20
 const CELL_MARGIN = 4
 
-const audioOptions = defaultAudios.map(audio => ({
-  value: audio.name,
-  label: audio.name,
-}))
+const audioOptions = [
+  {
+    value: '',
+    label: 'select',
+  },
+  ...audioResources.map(audio => ({
+    value: audio.name,
+    label: audio.name,
+  })),
+]
 
 type Props = {
   beatNum: number
@@ -22,22 +28,36 @@ type Props = {
   audios: AudioResource[]
   playAudio: (resourceIndex: number) => void
   selectAudio: (name: string, index: number) => void
+  addAudio: () => void
 }
 
-export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio, selectAudio }) => (
+export const Sequence: FC<Props> = ({
+  beatNum,
+  step,
+  audios,
+  playAudio,
+  selectAudio,
+  addAudio,
+}) => (
   <Wrapper allSteps={beatNum * 4}>
-    <Resources>
-      {audios.map((audio, i) => (
-        <li key={`resource-${i}-${audio.name}`}>
-          <Select
-            width={SELECT_SIZE}
-            value={audio.name}
-            options={audioOptions}
-            onChange={value => selectAudio(value, i)}
-          />
-        </li>
-      ))}
-    </Resources>
+    <ResourceWrapper>
+      <Resources>
+        {audios.map((audio, i) => (
+          <li key={`resource-${i}-${audio.name}`}>
+            <Select
+              width={SELECT_SIZE}
+              value={audio.name}
+              options={audioOptions}
+              onChange={value => selectAudio(value, i)}
+            />
+          </li>
+        ))}
+      </Resources>
+
+      <AddButtonWrapper>
+        <AddButton onClick={addAudio}>＋</AddButton>
+      </AddButtonWrapper>
+    </ResourceWrapper>
 
     <Table>
       {step >= 0 && <Progress step={step} />}
@@ -47,32 +67,21 @@ export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio, selectAu
       <Separater part={3} beat={beatNum} />
 
       <Rows>
-        <li>
-          {[...Array(beatNum * 4)].map((_, i) => (
-            <CellWrapper key={i}>
-              <Cell
-                currentStep={step}
-                stepIndex={i}
-                resourceIndex={0}
-                cellSize={CELL_SIZE}
-                playAudio={playAudio}
-              />
-            </CellWrapper>
-          ))}
-        </li>
-        <li>
-          {[...Array(beatNum * 4)].map((_, i) => (
-            <CellWrapper key={i}>
-              <Cell
-                currentStep={step}
-                stepIndex={i}
-                resourceIndex={1}
-                cellSize={CELL_SIZE}
-                playAudio={playAudio}
-              />
-            </CellWrapper>
-          ))}
-        </li>
+        {audios.map((audio, i) => (
+          <li key={`sequence-${i}-${audio.name}`}>
+            {[...Array(beatNum * 4)].map((_, j) => (
+              <CellWrapper key={`sequence-${i}-${audio.name}-${j}`}>
+                <Cell
+                  currentStep={step}
+                  stepIndex={j}
+                  resourceIndex={i}
+                  cellSize={CELL_SIZE}
+                  playAudio={playAudio}
+                />
+              </CellWrapper>
+            ))}
+          </li>
+        ))}
       </Rows>
     </Table>
   </Wrapper>
@@ -80,7 +89,7 @@ export const Sequence: FC<Props> = ({ beatNum, step, audios, playAudio, selectAu
 
 const Wrapper = styled.div<{ allSteps: number }>`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin: 0 auto;
   padding: ${size.space.xs}px;
 
@@ -92,11 +101,35 @@ const Wrapper = styled.div<{ allSteps: number }>`
       size.space.xs}px;
   `}
 `
+const ResourceWrapper = styled.div`
+  padding-right: ${size.space.xs}px;
+`
 const Resources = styled.ul`
-  margin-right: ${size.space.xs}px;
-
   > li:not(:first-child) {
     margin-top: ${CELL_MARGIN * 2}px;
+  }
+`
+const AddButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${size.space.xs}px;
+`
+const AddButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 1px 0 0 1px;
+  border-radius: 50%;
+  background-color: ${palette.blue};
+  color: ${palette.white};
+  font-size: ${size.font.l}px;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: 0 0 3px 2px ${palette.blue};
   }
 `
 const Table = styled.div`

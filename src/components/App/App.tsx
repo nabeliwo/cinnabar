@@ -1,14 +1,15 @@
 import React from 'react'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
-import { palette } from '../../constants/theme'
+import { palette, size } from '../../constants/theme'
 
 import { SceneContainer } from '../../containers/Scene'
 
 export const App = () => (
   <>
     <GlobalStyle />
+    <Title>Web step sequencer built with React</Title>
     <SceneContainer />
   </>
 )
@@ -41,4 +42,11 @@ const GlobalStyle = createGlobalStyle`
     background-color: inherit;
     color: inherit;
   }
+`
+const Title = styled.p`
+  padding: ${size.space.xs}px;
+  padding-top: ${size.space.m}px;
+  color: ${palette.white};
+  font-size: ${size.font.xl}px;
+  text-align: center;
 `
